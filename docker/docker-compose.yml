@@ -5,45 +5,34 @@ services:
         image: nginx
         container_name: aurora-web
         restart: always
-        deploy:
-            restart_policy:
-                condition: on-failure
         ports: 
-            - "80"
+            - "8008:8008"
         depends_on:
             - api
-            - db
+            - mysql 
         volumes:
-            - www:/var/www
+            - /var/www:/var/www
+            - ./nginx:/etc/nginx
 
     api:
         image: grakiss/api:0.0.1
         container_name: aurora-api
         ports: 
-            - "8000"
+            - "8009:8009"
         depends_on:
-            - db
+            - mysql
 
     mysql:
         image: mariadb:10.2 
         container_name: aurora-mysql
         ports:
             - "3306" 
-        volume:
+        volumes:
             - mysql_db:/var/lib/mysql
             - mysql_log:/var/log/mysql
 
-    mongo:
-        image: mongo:3.2.1
-        container_name: aurora-mongo
-        ports:
-            - "27017"
-        volume:
-            - mongo_db:/data/db
-
-volume:
+ 
+volumes:
+    mongo_db:
     mysql_db:
     mysql_log:
-    mongo_db:
-    www:/var/www
- 

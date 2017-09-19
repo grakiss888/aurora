@@ -18,13 +18,13 @@
 ##
 
 upstream api {
-    server aurora_api:8000;
+    server aurora-api:8009;
 }
 
 
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server ipv6only=on;
+	listen 8008 default_server;
+	listen [::]:8008 default_server ipv6only=on;
 
 	root /usr/share/nginx/html;
 	index index.html index.htm;

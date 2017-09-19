@@ -2,9 +2,10 @@ FROM ubuntu:16.04
 MAINTAINER leo wang
 
 RUN apt-get update
-RUN apt-get install python-dev python-pip python-virtualenv git
+RUN apt-get install -y python-pip git
 
-RUN pip install gunicorn
+RUN pip install --upgrade pip
+RUN pip install gunicorn flask
 
 ENV HOME /home
 WORKDIR /home
